@@ -1,13 +1,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:todo_list/data/api.dart';
+import 'package:todo_list/data/repositories/api.dart';
 
-import '../../../domain/models/task.dart';
+import '../../../domain/models/task_model.dart';
 
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit() : super(const HomeInitial());
+  HomeCubit() : super(const HomeInitial()) {
+    getTasks();
+  }
 
   Future<void> getTasks([Importance? importance]) async {
     emit(const HomeLoading());

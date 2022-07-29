@@ -19,7 +19,7 @@ class HomeLoading extends HomeState {
 }
 
 class HomeLoaded extends HomeState {
-  final List<Task> tasks;
+  final List<TaskModel> tasks;
 
   const HomeLoaded({required this.tasks});
 
