@@ -10,9 +10,9 @@ extension TaskConverter on TaskModel {
           'id': id,
           'text': text,
           'importance': importance.toJSON(),
-          'deadline': deadline.toUtc().millisecondsSinceEpoch,
+          'deadline': deadline?.toUtc().millisecondsSinceEpoch,
           'done': done,
-          'color': color.toHex(),
+          'color': color?.toHex(),
           'created_at': createdAt.toUtc().millisecondsSinceEpoch,
           'changed_at': changedAt.toUtc().millisecondsSinceEpoch,
           'last_updated_by': lastUpdatedBy,
@@ -23,14 +23,15 @@ extension TaskConverter on TaskModel {
         id: data['id'] as String,
         text: data['text'] as String,
         importance: ImportanceConverter.fromJSON(data['importance'] as String),
-        deadline: DateTime.fromMillisecondsSinceEpoch(
-            (data['deadline'] as int) * 1000),
+        deadline: data['deadline'] == null
+            ? null
+            : DateTime.fromMillisecondsSinceEpoch((data['deadline'] as int)),
         done: data['done'] as bool,
         color: ColorConverter.fromHex(data['color'] as String),
-        createdAt: DateTime.fromMillisecondsSinceEpoch(
-            (data['created_at'] as int) * 1000),
-        changedAt: DateTime.fromMillisecondsSinceEpoch(
-            (data['changed_at'] as int) * 1000),
+        createdAt:
+            DateTime.fromMillisecondsSinceEpoch((data['created_at'] as int)),
+        changedAt:
+            DateTime.fromMillisecondsSinceEpoch((data['changed_at'] as int)),
         lastUpdatedBy: data['last_updated_by'] as String,
       );
 }

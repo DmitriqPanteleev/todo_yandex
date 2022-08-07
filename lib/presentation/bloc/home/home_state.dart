@@ -21,16 +21,18 @@ class HomeLoading extends HomeState {
 class HomeLoaded extends HomeState {
   final List<TaskModel> tasks;
 
-  const HomeLoaded({required this.tasks});
+  const HomeLoaded(this.tasks);
 
   @override
   List<Object> get props => [tasks];
+
+  List<TaskModel> get undoneTasks => tasks.where((task) => !task.done).toList();
 }
 
 class HomeError extends HomeState {
   final String message;
 
-  const HomeError({required this.message});
+  const HomeError(this.message);
 
   @override
   List<Object> get props => [message];
